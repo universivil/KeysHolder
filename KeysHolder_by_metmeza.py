@@ -115,20 +115,25 @@ while state_loop == "on":
         else:
             print("\nPLEASE set up the keys before this.")
             
-    elif user_input == 3 :
+   elif user_input == 3 :
         if keys_list != [] :
             stop_and_start_key = input("Which keys you want to use to activate/desactivate spamming "+str(keys_list)+" ?\nAnswer : ")
             if stop_and_start_key in possible_keys:
                 try:
-                    speed_of_the_spam = float(input("At what speed you want to spam ? (max 0.01 = 92 cps)\nAnswer : "))
+                    speed_of_the_spam = float(input("At what speed you want to spam ? (max 0.01)\nAnswer : "))
                 except:
                     speed_of_the_spam = 0
                 if speed_of_the_spam >= 0.01 and speed_of_the_spam <= 100 :
+                    try:
+                        repeater = int(input("How many time do you want the keys to be pressed ? (nothing = infinite)\nAnswer : "))
+                    except:
+                        repeater = -1
                     print("When ready, press",stop_and_start_key,"to start")
                     keyboard.wait(stop_and_start_key) #wait until the key is pressed
                     print("When finished, press",stop_and_start_key,"to stop (if the speed is too fast you need to spam)")
                     time.sleep(0.5) #Wait in case of missclick
-                    while keyboard.is_pressed(stop_and_start_key) == False: #Hold all the keys until 'stop_and_start_key' is pressed again
+                    while not keyboard.is_pressed(stop_and_start_key) and repeater != 0: #Hold all the keys until 'stop_and_start_key' is pressed again
+                        repeater -= 1
                         time.sleep(speed_of_the_spam)
                         for keys in keys_list :
                             if keys in possible_keys:

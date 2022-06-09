@@ -115,7 +115,7 @@ while state_loop == "on":
         else:
             print("\nPLEASE set up the keys before this.")
             
-   elif user_input == 3 :
+    elif user_input == 3 :
         if keys_list != [] :
             stop_and_start_key = input("Which keys you want to use to activate/desactivate spamming "+str(keys_list)+" ?\nAnswer : ")
             if stop_and_start_key in possible_keys:
